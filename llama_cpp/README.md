@@ -25,6 +25,33 @@ The checkout currently used for local development is
 measurements, configure a separate build with `-DGGML_CUDA=ON` on a CUDA host;
 record the hardware, backend, and llama.cpp commit with each result.
 
+For the RTX PRO 5000 Blackwell host (compute capability 12.0), the `quant`
+environment uses CUDA Toolkit 12.8 and a single-architecture CUDA build:
+
+```bash
+mamba install -n quant -c nvidia -c conda-forge --override-channels \
+  cuda-toolkit=12.8 cmake ninja gxx_linux-64=13 'numpy>=2.2.6' \
+  pyyaml tqdm requests
+conda activate quant
+cmake -S ../llama.cpp -B ../llama.cpp/build-qalloc-cuda -G Ninja \
+  -DCMAKE_BUILD_TYPE=Release -DGGML_CUDA=ON \
+  -DCMAKE_CUDA_ARCHITECTURES=120a-real \
+  -DCMAKE_C_COMPILER="$CONDA_PREFIX/bin/x86_64-conda-linux-gnu-gcc" \
+  -DCMAKE_CXX_COMPILER="$CONDA_PREFIX/bin/x86_64-conda-linux-gnu-g++" \
+  -DCMAKE_CUDA_HOST_COMPILER="$CONDA_PREFIX/bin/x86_64-conda-linux-gnu-g++"
+cmake --build ../llama.cpp/build-qalloc-cuda \
+  --target llama-quantize llama-completion llama-bench llama-perplexity -j 8
+../llama.cpp/build-qalloc-cuda/bin/llama-bench --list-devices
+```
+
+For this build, pass `--bin-dir ../llama.cpp/build-qalloc-cuda/bin`,
+`--gpu-layers 999`, and `--device CUDA0` to the evaluation commands. Confirm
+the benchmark JSON reports `backends: CUDA` and `devices: CUDA0`. The GPU
+runtime does not require PyTorch. The `gguf-py` reader is loaded from the
+adjacent llama.cpp checkout by `quantize.py`; its Python dependencies are
+installed above. Converting original Hugging Face weights additionally needs
+the conversion requirements below.
+
 Use Python 3.10 or newer. The GGUF reader is needed even when starting from an
 existing F16/BF16 GGUF:
 
