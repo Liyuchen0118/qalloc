@@ -26,15 +26,17 @@ measurements, configure a separate build with `-DGGML_CUDA=ON` on a CUDA host;
 record the hardware, backend, and llama.cpp commit with each result.
 
 For the RTX PRO 5000 Blackwell host (compute capability 12.0), the `quant`
-environment uses CUDA Toolkit 12.8 and a single-architecture CUDA build:
+environment uses CUDA Toolkit 12.8, NCCL 2.32.3.1, and a
+single-architecture CUDA build:
 
 ```bash
 mamba install -n quant -c nvidia -c conda-forge --override-channels \
-  cuda-toolkit=12.8 cmake ninja gxx_linux-64=13 'numpy>=2.2.6' \
-  pyyaml tqdm requests
+  cuda-toolkit=12.8 cuda-version=12.8 nccl=2.32.3.1 \
+  cmake ninja gxx_linux-64=13 'numpy>=2.2.6' pyyaml tqdm requests
 conda activate quant
 cmake -S ../llama.cpp -B ../llama.cpp/build-qalloc-cuda -G Ninja \
-  -DCMAKE_BUILD_TYPE=Release -DGGML_CUDA=ON \
+  -DCMAKE_BUILD_TYPE=Release -DGGML_CUDA=ON -DGGML_CUDA_NCCL=ON \
+  -DNCCL_ROOT="$CONDA_PREFIX" \
   -DCMAKE_CUDA_ARCHITECTURES=120a-real \
   -DCMAKE_C_COMPILER="$CONDA_PREFIX/bin/x86_64-conda-linux-gnu-gcc" \
   -DCMAKE_CXX_COMPILER="$CONDA_PREFIX/bin/x86_64-conda-linux-gnu-g++" \
@@ -42,6 +44,8 @@ cmake -S ../llama.cpp -B ../llama.cpp/build-qalloc-cuda -G Ninja \
 cmake --build ../llama.cpp/build-qalloc-cuda \
   --target llama-quantize llama-completion llama-bench llama-perplexity -j 8
 ../llama.cpp/build-qalloc-cuda/bin/llama-bench --list-devices
+ldd ../llama.cpp/build-qalloc-cuda/bin/libggml-cuda.so | \
+  grep -E 'libnccl|libcudart|libcublas'
 ```
 
 For this build, pass `--bin-dir ../llama.cpp/build-qalloc-cuda/bin`,
@@ -52,6 +56,21 @@ adjacent llama.cpp checkout by `quantize.py`; its Python dependencies are
 installed above. Converting original Hugging Face weights additionally needs
 the conversion requirements below.
 
+On this host, a torch-first import can load the system's older `libstdc++`
+before NumPy. Pin the active conda environment's library directory once, then
+reactivate it before conversion:
+
+```bash
+conda env config vars set -n quant LD_LIBRARY_PATH="$CONDA_PREFIX/lib"
+conda deactivate
+conda activate quant
+```
+
+The pinned build links `libnccl.so.2`, and a two-GPU `--split-mode layer`
+benchmark reports both CUDA devices. This verifies multi-GPU layer placement,
+not NCCL all-reduce speedup. `--split-mode row` fails with `device CUDA2 does
+not support split buffers` on this llama.cpp commit.
+
 Use Python 3.10 or newer. The GGUF reader is needed even when starting from an
 existing F16/BF16 GGUF:
 
@@ -59,11 +78,15 @@ existing F16/BF16 GGUF:
 python -m pip install -e ../llama.cpp/gguf-py
 ```
 
-Only when converting Hugging Face weights, also install llama.cpp's conversion
-requirements (including PyTorch and Transformers):
+Only when converting Hugging Face weights, install CPU PyTorch and the
+converter's remaining dependencies. CUDA inference is handled by llama.cpp:
 
 ```bash
-python -m pip install -r ../llama.cpp/requirements/requirements-convert_hf_to_gguf.txt
+python -m pip install --index-url https://download.pytorch.org/whl/cpu \
+  'torch==2.11.0+cpu'
+python -m pip install 'transformers==4.57.6' 'sentencepiece==0.2.2' \
+  'protobuf==4.25.9'
+python -c 'import torch, numpy, transformers, sentencepiece, google.protobuf, gguf; print("converter imports OK")'
 ```
 
 If the directory already exists, verify its Git revision and rebuild its
@@ -131,6 +154,10 @@ python llama_cpp/quantize.py build \
   --output-gguf /path/to/model-mixed.gguf \
   --base-type Q4_K_M --threads 4
 ```
+
+When only the CUDA build exists, add
+`--quantize-bin ../llama.cpp/build-qalloc-cuda/bin/llama-quantize` to either
+`build` command.
 
 The base preset controls tensors outside the seven-projection allocation.
 Optionally pass `--imatrix /path/to/imatrix.dat` when comparing runs that use
