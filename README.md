@@ -1,11 +1,12 @@
 # Quantum-Assisted Budget-Aware Mixed-Precision Allocation for Large Language Models
 
 This repository contains the original QuBit allocation prototype and its
-supporting experiments. The current implementation targets analytic bit-width
-allocation with the candidate set `{2, 3, 4, 8}`. It does **not** yet implement
-GGUF/llama.cpp quantization, actual device-memory budget enforcement, or a
-client for the 1000-bit photonic Ising machine. Those are separate development
-tasks for the revised study.
+supporting experiments. The original optimizer targets analytic bit-width
+allocation with the candidate set `{2, 3, 4, 8}`. The `llama_cpp/` wrappers
+now turn a seven-projection-per-block allocation into a mixed-type GGUF and run
+inference, throughput benchmarks, and perplexity evaluation with an external
+llama.cpp checkout. The optimizer does not yet enforce measured device-memory
+budgets or connect to the 1000-bit photonic Ising machine.
 
 ## Contents
 
@@ -16,6 +17,7 @@ tasks for the revised study.
 | `classical_baselines/` | Classical optimization baselines from the original study |
 | `sensitivity_extraction/` | Model parameter and Fisher sensitivity extraction |
 | `quantization/` | Legacy MixQuant/PyTorch quantization and quality evaluation |
+| `llama_cpp/` | GGUF conversion, allocation, quantization, and evaluation wrappers; see [usage guide](llama_cpp/README.md) |
 | `model_info/` | Small, precomputed model statistics used by allocation scripts |
 | `results/` | Historical perplexity summary |
 
@@ -62,13 +64,15 @@ bash sensitivity_extraction/run_evaluation.sh \
 This operation requires the model weights, tokenizer, datasets, and substantial
 compute resources.
 
-## Development direction
+## Revised experiments
 
-The revised experiments will map the seven projection tensors in each decoder
-block to GGUF tensor names, measure actual size and quality for supported GGUF
-types, solve device-budget-aware allocations, and compare them under a fixed
-llama.cpp version and inference configuration. The existing Fisher scores are
-historical inputs, not validated GGUF loss estimates.
+The GGUF wrapper maps the seven projection tensors in each dense decoder block
+to GGUF tensor names and verifies the quantized tensor types. It records actual
+GGUF file size, while `llama_cpp/evaluate.py` records inference output,
+benchmark results, and corpus perplexity. Model weights and evaluation data
+are not included. The existing Fisher scores are historical inputs, not
+validated GGUF loss estimates. See the [llama.cpp guide](llama_cpp/README.md)
+for the full workflow and its scope.
 
 ## License and attribution
 

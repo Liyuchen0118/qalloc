@@ -1,0 +1,10 @@
+{
+  "default": 4,
+  "overrides": {
+    "layers.0.self_attn.q_proj": 8,
+    "layers.0.self_attn.k_proj": 3,
+    "layers.0.mlp.down_proj": 2,
+    "layers.1.mlp.gate_proj": 8,
+    "layers.1.mlp.up_proj": 3
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "default": 8,
+  "overrides": {
+    "layers.0.self_attn.q_proj": 16,
+    "layers.1.mlp.down_proj": 16
+  }
+}

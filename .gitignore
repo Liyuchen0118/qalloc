@@ -43,6 +43,8 @@ Thumbs.db
 *.ckpt
 *.safetensors
 *.gguf
+*.gguf.allocation.json
+*.gguf.tensor-types.txt
 *.bin
 models/
 checkpoints/
