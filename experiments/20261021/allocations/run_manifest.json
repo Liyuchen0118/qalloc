@@ -1,0 +1,254 @@
+{
+  "author": "Yuchen Li",
+  "model": "Qwen2.5-7B",
+  "loss_definition": "sum of squared differences between original F16 GGUF weights and actual dequantized candidate GGUF weights",
+  "fixed_non_target_bytes": 760916128,
+  "runs": [
+    {
+      "budget_index": 0,
+      "method": "milp",
+      "allocation_id": "allocation_b848932c2d7f",
+      "budget_full_file_bytes": 3564751008,
+      "expected_full_file_bytes": 3564751008,
+      "proxy_objective": 42332.14651250009
+    },
+    {
+      "budget_index": 0,
+      "method": "lagrangian_repair_exchange",
+      "allocation_id": "allocation_b848932c2d7f",
+      "budget_full_file_bytes": 3564751008,
+      "expected_full_file_bytes": 3564751008,
+      "proxy_objective": 42332.14651250009
+    },
+    {
+      "budget_index": 0,
+      "method": "greedy_gain_per_byte",
+      "allocation_id": "allocation_b848932c2d7f",
+      "budget_full_file_bytes": 3564751008,
+      "expected_full_file_bytes": 3564751008,
+      "proxy_objective": 42332.14651250009
+    },
+    {
+      "budget_index": 1,
+      "method": "milp",
+      "allocation_id": "allocation_9de5e74044c6",
+      "budget_full_file_bytes": 3998070944,
+      "expected_full_file_bytes": 3998070944,
+      "proxy_objective": 24336.790390014965
+    },
+    {
+      "budget_index": 1,
+      "method": "lagrangian_repair_exchange",
+      "allocation_id": "allocation_9de5e74044c6",
+      "budget_full_file_bytes": 3998070944,
+      "expected_full_file_bytes": 3998070944,
+      "proxy_objective": 24336.790390014965
+    },
+    {
+      "budget_index": 1,
+      "method": "greedy_gain_per_byte",
+      "allocation_id": "allocation_344bb6442617",
+      "budget_full_file_bytes": 3998070944,
+      "expected_full_file_bytes": 3998070944,
+      "proxy_objective": 24343.35902823293
+    },
+    {
+      "budget_index": 2,
+      "method": "milp",
+      "allocation_id": "allocation_f7ff0815bebc",
+      "budget_full_file_bytes": 4431390880,
+      "expected_full_file_bytes": 4431362208,
+      "proxy_objective": 9496.181179358617
+    },
+    {
+      "budget_index": 2,
+      "method": "lagrangian_repair_exchange",
+      "allocation_id": "allocation_f7ff0815bebc",
+      "budget_full_file_bytes": 4431390880,
+      "expected_full_file_bytes": 4431362208,
+      "proxy_objective": 9496.181179358617
+    },
+    {
+      "budget_index": 2,
+      "method": "greedy_gain_per_byte",
+      "allocation_id": "allocation_8038f1cd75ad",
+      "budget_full_file_bytes": 4431390880,
+      "expected_full_file_bytes": 4431304864,
+      "proxy_objective": 9557.101243968998
+    },
+    {
+      "budget_index": 3,
+      "method": "milp",
+      "allocation_id": "allocation_909a21305420",
+      "budget_full_file_bytes": 4839221408,
+      "expected_full_file_bytes": 4839221408,
+      "proxy_objective": 5644.587938765594
+    },
+    {
+      "budget_index": 3,
+      "method": "lagrangian_repair_exchange",
+      "allocation_id": "allocation_909a21305420",
+      "budget_full_file_bytes": 4839221408,
+      "expected_full_file_bytes": 4839221408,
+      "proxy_objective": 5644.587938765594
+    },
+    {
+      "budget_index": 3,
+      "method": "greedy_gain_per_byte",
+      "allocation_id": "allocation_5d95f1167253",
+      "budget_full_file_bytes": 4839221408,
+      "expected_full_file_bytes": 4839221408,
+      "proxy_objective": 5645.404131009591
+    },
+    {
+      "budget_index": 4,
+      "method": "milp",
+      "allocation_id": "allocation_a0f124bfa1e1",
+      "budget_full_file_bytes": 5247051936,
+      "expected_full_file_bytes": 5247051936,
+      "proxy_objective": 2436.9102220778454
+    },
+    {
+      "budget_index": 4,
+      "method": "lagrangian_repair_exchange",
+      "allocation_id": "allocation_a0f124bfa1e1",
+      "budget_full_file_bytes": 5247051936,
+      "expected_full_file_bytes": 5247051936,
+      "proxy_objective": 2436.9102220778454
+    },
+    {
+      "budget_index": 4,
+      "method": "greedy_gain_per_byte",
+      "allocation_id": "allocation_a0f124bfa1e1",
+      "budget_full_file_bytes": 5247051936,
+      "expected_full_file_bytes": 5247051936,
+      "proxy_objective": 2436.9102220778454
+    }
+  ],
+  "distinct_allocations": [
+    {
+      "id": "allocation_b848932c2d7f",
+      "allocation_file": "experiments/20261021/allocations/allocation_b848932c2d7f.json",
+      "model_file": "allocation_b848932c2d7f.gguf",
+      "expected_full_file_bytes": 3564751008,
+      "uses": [
+        {
+          "budget_index": 0,
+          "method": "milp"
+        },
+        {
+          "budget_index": 0,
+          "method": "lagrangian_repair_exchange"
+        },
+        {
+          "budget_index": 0,
+          "method": "greedy_gain_per_byte"
+        }
+      ]
+    },
+    {
+      "id": "allocation_9de5e74044c6",
+      "allocation_file": "experiments/20261021/allocations/allocation_9de5e74044c6.json",
+      "model_file": "allocation_9de5e74044c6.gguf",
+      "expected_full_file_bytes": 3998070944,
+      "uses": [
+        {
+          "budget_index": 1,
+          "method": "milp"
+        },
+        {
+          "budget_index": 1,
+          "method": "lagrangian_repair_exchange"
+        }
+      ]
+    },
+    {
+      "id": "allocation_344bb6442617",
+      "allocation_file": "experiments/20261021/allocations/allocation_344bb6442617.json",
+      "model_file": "allocation_344bb6442617.gguf",
+      "expected_full_file_bytes": 3998070944,
+      "uses": [
+        {
+          "budget_index": 1,
+          "method": "greedy_gain_per_byte"
+        }
+      ]
+    },
+    {
+      "id": "allocation_f7ff0815bebc",
+      "allocation_file": "experiments/20261021/allocations/allocation_f7ff0815bebc.json",
+      "model_file": "allocation_f7ff0815bebc.gguf",
+      "expected_full_file_bytes": 4431362208,
+      "uses": [
+        {
+          "budget_index": 2,
+          "method": "milp"
+        },
+        {
+          "budget_index": 2,
+          "method": "lagrangian_repair_exchange"
+        }
+      ]
+    },
+    {
+      "id": "allocation_8038f1cd75ad",
+      "allocation_file": "experiments/20261021/allocations/allocation_8038f1cd75ad.json",
+      "model_file": "allocation_8038f1cd75ad.gguf",
+      "expected_full_file_bytes": 4431304864,
+      "uses": [
+        {
+          "budget_index": 2,
+          "method": "greedy_gain_per_byte"
+        }
+      ]
+    },
+    {
+      "id": "allocation_909a21305420",
+      "allocation_file": "experiments/20261021/allocations/allocation_909a21305420.json",
+      "model_file": "allocation_909a21305420.gguf",
+      "expected_full_file_bytes": 4839221408,
+      "uses": [
+        {
+          "budget_index": 3,
+          "method": "milp"
+        },
+        {
+          "budget_index": 3,
+          "method": "lagrangian_repair_exchange"
+        }
+      ]
+    },
+    {
+      "id": "allocation_5d95f1167253",
+      "allocation_file": "experiments/20261021/allocations/allocation_5d95f1167253.json",
+      "model_file": "allocation_5d95f1167253.gguf",
+      "expected_full_file_bytes": 4839221408,
+      "uses": [
+        {
+          "budget_index": 3,
+          "method": "greedy_gain_per_byte"
+        }
+      ]
+    },
+    {
+      "id": "allocation_a0f124bfa1e1",
+      "allocation_file": "experiments/20261021/allocations/allocation_a0f124bfa1e1.json",
+      "model_file": "allocation_a0f124bfa1e1.gguf",
+      "expected_full_file_bytes": 5247051936,
+      "uses": [
+        {
+          "budget_index": 4,
+          "method": "milp"
+        },
+        {
+          "budget_index": 4,
+          "method": "lagrangian_repair_exchange"
+        },
+        {
+          "budget_index": 4,
+          "method": "greedy_gain_per_byte"
+        }
+      ]
+    }
+  ]
+}

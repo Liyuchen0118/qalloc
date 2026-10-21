@@ -1,0 +1,425 @@
+{
+  "author": "Yuchen Li",
+  "experiment": "Qwen2.5-7B mixed-type classical baselines",
+  "kind": "full",
+  "corpus": "/home/hefeng/quant/qalloc/experiments/20261021/corpus/wiki.test.raw",
+  "corpus_sha256": "173c87a53759e0201f33e0ccf978e510c2042d7f2cb78229d9a50d79b9e7dd08",
+  "gpu": {
+    "index": 0,
+    "uuid": "GPU-54e16f83-71b9-d6fd-26c8-a0d483c5e7c3",
+    "memory_used_mib": 0,
+    "utilization_percent": 0,
+    "compute_processes": []
+  },
+  "llama_cpp_commit": "493253fe5a5af7e800b3c92a2452b5684a99e961",
+  "runs": [
+    {
+      "allocation_id": "allocation_b848932c2d7f",
+      "kind": "ppl",
+      "result_file": "/home/hefeng/quant/qalloc/experiments/20261021/full/allocation_b848932c2d7f.ppl.json",
+      "status": "ok",
+      "exit_code": 0,
+      "gpu_before": {
+        "index": 0,
+        "uuid": "GPU-54e16f83-71b9-d6fd-26c8-a0d483c5e7c3",
+        "memory_used_mib": 0,
+        "utilization_percent": 0,
+        "compute_processes": []
+      },
+      "peak_gpu_memory_mib": 3949,
+      "stdout_tail": "Result: /home/hefeng/quant/qalloc/experiments/20261021/full/allocation_b848932c2d7f.ppl.json\nPPL: 6.9646\n",
+      "stderr_tail": ""
+    },
+    {
+      "allocation_id": "allocation_b848932c2d7f",
+      "kind": "prefill",
+      "result_file": "/home/hefeng/quant/qalloc/experiments/20261021/full/allocation_b848932c2d7f.prefill.json",
+      "status": "ok",
+      "exit_code": 0,
+      "gpu_before": {
+        "index": 0,
+        "uuid": "GPU-54e16f83-71b9-d6fd-26c8-a0d483c5e7c3",
+        "memory_used_mib": 0,
+        "utilization_percent": 0,
+        "compute_processes": []
+      },
+      "peak_gpu_memory_mib": 3445,
+      "stdout_tail": "Result: /home/hefeng/quant/qalloc/experiments/20261021/full/allocation_b848932c2d7f.prefill.json\npp=512 tg=0 avg_ts=9335.023587\n",
+      "stderr_tail": ""
+    },
+    {
+      "allocation_id": "allocation_b848932c2d7f",
+      "kind": "decode",
+      "result_file": "/home/hefeng/quant/qalloc/experiments/20261021/full/allocation_b848932c2d7f.decode.json",
+      "status": "ok",
+      "exit_code": 0,
+      "gpu_before": {
+        "index": 0,
+        "uuid": "GPU-54e16f83-71b9-d6fd-26c8-a0d483c5e7c3",
+        "memory_used_mib": 0,
+        "utilization_percent": 0,
+        "compute_processes": []
+      },
+      "peak_gpu_memory_mib": 3589,
+      "stdout_tail": "Result: /home/hefeng/quant/qalloc/experiments/20261021/full/allocation_b848932c2d7f.decode.json\npp=0 tg=128 avg_ts=261.819746\n",
+      "stderr_tail": ""
+    },
+    {
+      "allocation_id": "allocation_9de5e74044c6",
+      "kind": "ppl",
+      "result_file": "/home/hefeng/quant/qalloc/experiments/20261021/full/allocation_9de5e74044c6.ppl.json",
+      "status": "ok",
+      "exit_code": 0,
+      "gpu_before": {
+        "index": 0,
+        "uuid": "GPU-54e16f83-71b9-d6fd-26c8-a0d483c5e7c3",
+        "memory_used_mib": 0,
+        "utilization_percent": 0,
+        "compute_processes": []
+      },
+      "peak_gpu_memory_mib": 4365,
+      "stdout_tail": "Result: /home/hefeng/quant/qalloc/experiments/20261021/full/allocation_9de5e74044c6.ppl.json\nPPL: 6.6841\n",
+      "stderr_tail": ""
+    },
+    {
+      "allocation_id": "allocation_9de5e74044c6",
+      "kind": "prefill",
+      "result_file": "/home/hefeng/quant/qalloc/experiments/20261021/full/allocation_9de5e74044c6.prefill.json",
+      "status": "ok",
+      "exit_code": 0,
+      "gpu_before": {
+        "index": 0,
+        "uuid": "GPU-54e16f83-71b9-d6fd-26c8-a0d483c5e7c3",
+        "memory_used_mib": 0,
+        "utilization_percent": 0,
+        "compute_processes": []
+      },
+      "peak_gpu_memory_mib": 3859,
+      "stdout_tail": "Result: /home/hefeng/quant/qalloc/experiments/20261021/full/allocation_9de5e74044c6.prefill.json\npp=512 tg=0 avg_ts=10132.63551\n",
+      "stderr_tail": ""
+    },
+    {
+      "allocation_id": "allocation_9de5e74044c6",
+      "kind": "decode",
+      "result_file": "/home/hefeng/quant/qalloc/experiments/20261021/full/allocation_9de5e74044c6.decode.json",
+      "status": "ok",
+      "exit_code": 0,
+      "gpu_before": {
+        "index": 0,
+        "uuid": "GPU-54e16f83-71b9-d6fd-26c8-a0d483c5e7c3",
+        "memory_used_mib": 0,
+        "utilization_percent": 0,
+        "compute_processes": []
+      },
+      "peak_gpu_memory_mib": 4003,
+      "stdout_tail": "Result: /home/hefeng/quant/qalloc/experiments/20261021/full/allocation_9de5e74044c6.decode.json\npp=0 tg=128 avg_ts=245.16159\n",
+      "stderr_tail": ""
+    },
+    {
+      "allocation_id": "allocation_344bb6442617",
+      "kind": "ppl",
+      "result_file": "/home/hefeng/quant/qalloc/experiments/20261021/full/allocation_344bb6442617.ppl.json",
+      "status": "ok",
+      "exit_code": 0,
+      "gpu_before": {
+        "index": 0,
+        "uuid": "GPU-54e16f83-71b9-d6fd-26c8-a0d483c5e7c3",
+        "memory_used_mib": 0,
+        "utilization_percent": 0,
+        "compute_processes": []
+      },
+      "peak_gpu_memory_mib": 4365,
+      "stdout_tail": "Result: /home/hefeng/quant/qalloc/experiments/20261021/full/allocation_344bb6442617.ppl.json\nPPL: 6.6767\n",
+      "stderr_tail": ""
+    },
+    {
+      "allocation_id": "allocation_344bb6442617",
+      "kind": "prefill",
+      "result_file": "/home/hefeng/quant/qalloc/experiments/20261021/full/allocation_344bb6442617.prefill.json",
+      "status": "ok",
+      "exit_code": 0,
+      "gpu_before": {
+        "index": 0,
+        "uuid": "GPU-54e16f83-71b9-d6fd-26c8-a0d483c5e7c3",
+        "memory_used_mib": 3,
+        "utilization_percent": 0,
+        "compute_processes": []
+      },
+      "peak_gpu_memory_mib": 3859,
+      "stdout_tail": "Result: /home/hefeng/quant/qalloc/experiments/20261021/full/allocation_344bb6442617.prefill.json\npp=512 tg=0 avg_ts=10111.441721\n",
+      "stderr_tail": ""
+    },
+    {
+      "allocation_id": "allocation_344bb6442617",
+      "kind": "decode",
+      "result_file": "/home/hefeng/quant/qalloc/experiments/20261021/full/allocation_344bb6442617.decode.json",
+      "status": "ok",
+      "exit_code": 0,
+      "gpu_before": {
+        "index": 0,
+        "uuid": "GPU-54e16f83-71b9-d6fd-26c8-a0d483c5e7c3",
+        "memory_used_mib": 3,
+        "utilization_percent": 0,
+        "compute_processes": []
+      },
+      "peak_gpu_memory_mib": 4003,
+      "stdout_tail": "Result: /home/hefeng/quant/qalloc/experiments/20261021/full/allocation_344bb6442617.decode.json\npp=0 tg=128 avg_ts=245.071679\n",
+      "stderr_tail": ""
+    },
+    {
+      "allocation_id": "allocation_f7ff0815bebc",
+      "kind": "ppl",
+      "result_file": "/home/hefeng/quant/qalloc/experiments/20261021/full/allocation_f7ff0815bebc.ppl.json",
+      "status": "ok",
+      "exit_code": 0,
+      "gpu_before": {
+        "index": 0,
+        "uuid": "GPU-54e16f83-71b9-d6fd-26c8-a0d483c5e7c3",
+        "memory_used_mib": 3,
+        "utilization_percent": 0,
+        "compute_processes": []
+      },
+      "peak_gpu_memory_mib": 4779,
+      "stdout_tail": "Result: /home/hefeng/quant/qalloc/experiments/20261021/full/allocation_f7ff0815bebc.ppl.json\nPPL: 6.2932\n",
+      "stderr_tail": ""
+    },
+    {
+      "allocation_id": "allocation_f7ff0815bebc",
+      "kind": "prefill",
+      "result_file": "/home/hefeng/quant/qalloc/experiments/20261021/full/allocation_f7ff0815bebc.prefill.json",
+      "status": "ok",
+      "exit_code": 0,
+      "gpu_before": {
+        "index": 0,
+        "uuid": "GPU-54e16f83-71b9-d6fd-26c8-a0d483c5e7c3",
+        "memory_used_mib": 3,
+        "utilization_percent": 0,
+        "compute_processes": []
+      },
+      "peak_gpu_memory_mib": 4273,
+      "stdout_tail": "Result: /home/hefeng/quant/qalloc/experiments/20261021/full/allocation_f7ff0815bebc.prefill.json\npp=512 tg=0 avg_ts=11143.206646\n",
+      "stderr_tail": ""
+    },
+    {
+      "allocation_id": "allocation_f7ff0815bebc",
+      "kind": "decode",
+      "result_file": "/home/hefeng/quant/qalloc/experiments/20261021/full/allocation_f7ff0815bebc.decode.json",
+      "status": "ok",
+      "exit_code": 0,
+      "gpu_before": {
+        "index": 0,
+        "uuid": "GPU-54e16f83-71b9-d6fd-26c8-a0d483c5e7c3",
+        "memory_used_mib": 3,
+        "utilization_percent": 0,
+        "compute_processes": []
+      },
+      "peak_gpu_memory_mib": 4417,
+      "stdout_tail": "Result: /home/hefeng/quant/qalloc/experiments/20261021/full/allocation_f7ff0815bebc.decode.json\npp=0 tg=128 avg_ts=227.979028\n",
+      "stderr_tail": ""
+    },
+    {
+      "allocation_id": "allocation_8038f1cd75ad",
+      "kind": "ppl",
+      "result_file": "/home/hefeng/quant/qalloc/experiments/20261021/full/allocation_8038f1cd75ad.ppl.json",
+      "status": "ok",
+      "exit_code": 0,
+      "gpu_before": {
+        "index": 0,
+        "uuid": "GPU-54e16f83-71b9-d6fd-26c8-a0d483c5e7c3",
+        "memory_used_mib": 3,
+        "utilization_percent": 0,
+        "compute_processes": []
+      },
+      "peak_gpu_memory_mib": 4777,
+      "stdout_tail": "Result: /home/hefeng/quant/qalloc/experiments/20261021/full/allocation_8038f1cd75ad.ppl.json\nPPL: 6.2926\n",
+      "stderr_tail": ""
+    },
+    {
+      "allocation_id": "allocation_8038f1cd75ad",
+      "kind": "prefill",
+      "result_file": "/home/hefeng/quant/qalloc/experiments/20261021/full/allocation_8038f1cd75ad.prefill.json",
+      "status": "ok",
+      "exit_code": 0,
+      "gpu_before": {
+        "index": 0,
+        "uuid": "GPU-54e16f83-71b9-d6fd-26c8-a0d483c5e7c3",
+        "memory_used_mib": 3,
+        "utilization_percent": 0,
+        "compute_processes": []
+      },
+      "peak_gpu_memory_mib": 4271,
+      "stdout_tail": "Result: /home/hefeng/quant/qalloc/experiments/20261021/full/allocation_8038f1cd75ad.prefill.json\npp=512 tg=0 avg_ts=11118.169166\n",
+      "stderr_tail": ""
+    },
+    {
+      "allocation_id": "allocation_8038f1cd75ad",
+      "kind": "decode",
+      "result_file": "/home/hefeng/quant/qalloc/experiments/20261021/full/allocation_8038f1cd75ad.decode.json",
+      "status": "ok",
+      "exit_code": 0,
+      "gpu_before": {
+        "index": 0,
+        "uuid": "GPU-54e16f83-71b9-d6fd-26c8-a0d483c5e7c3",
+        "memory_used_mib": 3,
+        "utilization_percent": 0,
+        "compute_processes": []
+      },
+      "peak_gpu_memory_mib": 4415,
+      "stdout_tail": "Result: /home/hefeng/quant/qalloc/experiments/20261021/full/allocation_8038f1cd75ad.decode.json\npp=0 tg=128 avg_ts=228.094553\n",
+      "stderr_tail": ""
+    },
+    {
+      "allocation_id": "allocation_909a21305420",
+      "kind": "ppl",
+      "result_file": "/home/hefeng/quant/qalloc/experiments/20261021/full/allocation_909a21305420.ppl.json",
+      "status": "ok",
+      "exit_code": 0,
+      "gpu_before": {
+        "index": 0,
+        "uuid": "GPU-54e16f83-71b9-d6fd-26c8-a0d483c5e7c3",
+        "memory_used_mib": 3,
+        "utilization_percent": 0,
+        "compute_processes": []
+      },
+      "peak_gpu_memory_mib": 5167,
+      "stdout_tail": "Result: /home/hefeng/quant/qalloc/experiments/20261021/full/allocation_909a21305420.ppl.json\nPPL: 6.2354\n",
+      "stderr_tail": ""
+    },
+    {
+      "allocation_id": "allocation_909a21305420",
+      "kind": "prefill",
+      "result_file": "/home/hefeng/quant/qalloc/experiments/20261021/full/allocation_909a21305420.prefill.json",
+      "status": "ok",
+      "exit_code": 0,
+      "gpu_before": {
+        "index": 0,
+        "uuid": "GPU-54e16f83-71b9-d6fd-26c8-a0d483c5e7c3",
+        "memory_used_mib": 3,
+        "utilization_percent": 0,
+        "compute_processes": []
+      },
+      "peak_gpu_memory_mib": 4661,
+      "stdout_tail": "Result: /home/hefeng/quant/qalloc/experiments/20261021/full/allocation_909a21305420.prefill.json\npp=512 tg=0 avg_ts=10934.525822\n",
+      "stderr_tail": ""
+    },
+    {
+      "allocation_id": "allocation_909a21305420",
+      "kind": "decode",
+      "result_file": "/home/hefeng/quant/qalloc/experiments/20261021/full/allocation_909a21305420.decode.json",
+      "status": "ok",
+      "exit_code": 0,
+      "gpu_before": {
+        "index": 0,
+        "uuid": "GPU-54e16f83-71b9-d6fd-26c8-a0d483c5e7c3",
+        "memory_used_mib": 3,
+        "utilization_percent": 0,
+        "compute_processes": []
+      },
+      "peak_gpu_memory_mib": 4805,
+      "stdout_tail": "Result: /home/hefeng/quant/qalloc/experiments/20261021/full/allocation_909a21305420.decode.json\npp=0 tg=128 avg_ts=211.631719\n",
+      "stderr_tail": ""
+    },
+    {
+      "allocation_id": "allocation_5d95f1167253",
+      "kind": "ppl",
+      "result_file": "/home/hefeng/quant/qalloc/experiments/20261021/full/allocation_5d95f1167253.ppl.json",
+      "status": "ok",
+      "exit_code": 0,
+      "gpu_before": {
+        "index": 0,
+        "uuid": "GPU-54e16f83-71b9-d6fd-26c8-a0d483c5e7c3",
+        "memory_used_mib": 3,
+        "utilization_percent": 0,
+        "compute_processes": []
+      },
+      "peak_gpu_memory_mib": 5167,
+      "stdout_tail": "Result: /home/hefeng/quant/qalloc/experiments/20261021/full/allocation_5d95f1167253.ppl.json\nPPL: 6.2356\n",
+      "stderr_tail": ""
+    },
+    {
+      "allocation_id": "allocation_5d95f1167253",
+      "kind": "prefill",
+      "result_file": "/home/hefeng/quant/qalloc/experiments/20261021/full/allocation_5d95f1167253.prefill.json",
+      "status": "ok",
+      "exit_code": 0,
+      "gpu_before": {
+        "index": 0,
+        "uuid": "GPU-54e16f83-71b9-d6fd-26c8-a0d483c5e7c3",
+        "memory_used_mib": 3,
+        "utilization_percent": 0,
+        "compute_processes": []
+      },
+      "peak_gpu_memory_mib": 4661,
+      "stdout_tail": "Result: /home/hefeng/quant/qalloc/experiments/20261021/full/allocation_5d95f1167253.prefill.json\npp=512 tg=0 avg_ts=10976.552522\n",
+      "stderr_tail": ""
+    },
+    {
+      "allocation_id": "allocation_5d95f1167253",
+      "kind": "decode",
+      "result_file": "/home/hefeng/quant/qalloc/experiments/20261021/full/allocation_5d95f1167253.decode.json",
+      "status": "ok",
+      "exit_code": 0,
+      "gpu_before": {
+        "index": 0,
+        "uuid": "GPU-54e16f83-71b9-d6fd-26c8-a0d483c5e7c3",
+        "memory_used_mib": 3,
+        "utilization_percent": 0,
+        "compute_processes": []
+      },
+      "peak_gpu_memory_mib": 4805,
+      "stdout_tail": "Result: /home/hefeng/quant/qalloc/experiments/20261021/full/allocation_5d95f1167253.decode.json\npp=0 tg=128 avg_ts=211.674896\n",
+      "stderr_tail": ""
+    },
+    {
+      "allocation_id": "allocation_a0f124bfa1e1",
+      "kind": "ppl",
+      "result_file": "/home/hefeng/quant/qalloc/experiments/20261021/full/allocation_a0f124bfa1e1.ppl.json",
+      "status": "ok",
+      "exit_code": 0,
+      "gpu_before": {
+        "index": 0,
+        "uuid": "GPU-54e16f83-71b9-d6fd-26c8-a0d483c5e7c3",
+        "memory_used_mib": 3,
+        "utilization_percent": 0,
+        "compute_processes": []
+      },
+      "peak_gpu_memory_mib": 5553,
+      "stdout_tail": "Result: /home/hefeng/quant/qalloc/experiments/20261021/full/allocation_a0f124bfa1e1.ppl.json\nPPL: 6.181\n",
+      "stderr_tail": ""
+    },
+    {
+      "allocation_id": "allocation_a0f124bfa1e1",
+      "kind": "prefill",
+      "result_file": "/home/hefeng/quant/qalloc/experiments/20261021/full/allocation_a0f124bfa1e1.prefill.json",
+      "status": "ok",
+      "exit_code": 0,
+      "gpu_before": {
+        "index": 0,
+        "uuid": "GPU-54e16f83-71b9-d6fd-26c8-a0d483c5e7c3",
+        "memory_used_mib": 0,
+        "utilization_percent": 0,
+        "compute_processes": []
+      },
+      "peak_gpu_memory_mib": 343,
+      "stdout_tail": "Result: /home/hefeng/quant/qalloc/experiments/20261021/full/allocation_a0f124bfa1e1.prefill.json\npp=512 tg=0 avg_ts=10775.312695\n",
+      "stderr_tail": ""
+    },
+    {
+      "allocation_id": "allocation_a0f124bfa1e1",
+      "kind": "decode",
+      "result_file": "/home/hefeng/quant/qalloc/experiments/20261021/full/allocation_a0f124bfa1e1.decode.json",
+      "status": "ok",
+      "exit_code": 0,
+      "gpu_before": {
+        "index": 0,
+        "uuid": "GPU-54e16f83-71b9-d6fd-26c8-a0d483c5e7c3",
+        "memory_used_mib": 0,
+        "utilization_percent": 0,
+        "compute_processes": []
+      },
+      "peak_gpu_memory_mib": 5193,
+      "stdout_tail": "Result: /home/hefeng/quant/qalloc/experiments/20261021/full/allocation_a0f124bfa1e1.decode.json\npp=0 tg=128 avg_ts=201.784521\n",
+      "stderr_tail": ""
+    }
+  ]
+}

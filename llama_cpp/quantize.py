@@ -10,6 +10,8 @@ import sys
 from pathlib import Path
 from typing import Any
 
+__author__ = "Yuchen Li"
+
 
 ROLE_TO_TENSOR = {
     "self_attn.q_proj": "attn_q",
@@ -218,9 +220,17 @@ def convert(args: argparse.Namespace) -> None:
     if args.output_gguf.exists():
         raise FileExistsError(args.output_gguf)
     args.output_gguf.parent.mkdir(parents=True, exist_ok=True)
+    metadata_path = Path(str(args.output_gguf) + ".metadata.json")
+    if metadata_path.exists():
+        raise FileExistsError(metadata_path)
+    metadata_path.write_text(
+        json.dumps({"general.author": args.author}, indent=2) + "\n",
+        encoding="utf-8",
+    )
     command = [
         sys.executable, str(script), str(args.hf_model),
         "--outfile", str(args.output_gguf), "--outtype", args.outtype,
+        "--metadata", str(metadata_path),
     ]
     subprocess.run(command, check=True)
     print(args.output_gguf)
@@ -253,6 +263,7 @@ def build(args: argparse.Namespace) -> None:
     manifest_path = Path(str(args.output_gguf) + ".allocation.json")
     log_path = Path(str(args.output_gguf) + ".quantize.log")
     manifest = {
+        "author": __author__,
         "llama_cpp_commit": git_revision(args.llama_cpp_dir),
         "source_gguf": str(args.source_gguf),
         "source_bytes": args.source_gguf.stat().st_size,
@@ -284,6 +295,7 @@ def build(args: argparse.Namespace) -> None:
     command += [str(args.source_gguf), str(args.output_gguf), args.base_type, str(args.threads)]
     manifest["command"] = command
     with log_path.open("w", encoding="utf-8") as log:
+        log.write(f"Author: {__author__}\n")
         result = subprocess.run(command, stdout=log, stderr=subprocess.STDOUT, check=False)
     manifest["quantizer_exit_code"] = result.returncode
     manifest["quantizer_log"] = str(log_path)
@@ -330,6 +342,51 @@ def build(args: argparse.Namespace) -> None:
     print(manifest_path)
 
 
+def preset(args: argparse.Namespace) -> None:
+    if not args.source_gguf.is_file():
+        raise FileNotFoundError(args.source_gguf)
+    if args.output_gguf.exists():
+        raise FileExistsError(args.output_gguf)
+    if args.threads <= 0:
+        raise ValueError("--threads must be positive")
+    quantize_bin = args.quantize_bin or args.llama_cpp_dir / "build-qalloc/bin/llama-quantize"
+    if not quantize_bin.is_file():
+        raise FileNotFoundError(quantize_bin)
+    source = load_gguf(args.llama_cpp_dir, args.source_gguf)
+    validate_source_types(source)
+    args.output_gguf.parent.mkdir(parents=True, exist_ok=True)
+    manifest_path = Path(str(args.output_gguf) + ".preset.json")
+    log_path = Path(str(args.output_gguf) + ".quantize.log")
+    if manifest_path.exists() or log_path.exists():
+        raise FileExistsError("Preset manifest or log already exists")
+    command = [str(quantize_bin), str(args.source_gguf), str(args.output_gguf),
+               args.preset_type, str(args.threads)]
+    manifest = {
+        "author": __author__, "type": "whole_model_preset", "preset_type": args.preset_type,
+        "source_gguf": str(args.source_gguf), "output_gguf": str(args.output_gguf),
+        "llama_cpp_commit": git_revision(args.llama_cpp_dir), "command": command,
+        "log_file": str(log_path), "status": "running",
+    }
+    write_json(manifest_path, manifest)
+    with log_path.open("w", encoding="utf-8") as log:
+        log.write(f"Author: {__author__}\n")
+        result = subprocess.run(command, stdout=log, stderr=subprocess.STDOUT, check=False)
+    manifest["quantizer_exit_code"] = result.returncode
+    if result.returncode:
+        manifest["status"] = "quantizer_failed"
+        write_json(manifest_path, manifest)
+        raise RuntimeError(f"llama-quantize failed; see {log_path}")
+    output = load_gguf(args.llama_cpp_dir, args.output_gguf)
+    manifest["source_tensor_count"] = len(source)
+    manifest["output_tensor_count"] = len(output)
+    manifest["output_bytes"] = args.output_gguf.stat().st_size
+    manifest["status"] = "validated" if set(source) == set(output) else "validation_failed"
+    write_json(manifest_path, manifest)
+    if manifest["status"] != "validated":
+        raise RuntimeError(f"Preset tensor inventory differs; see {manifest_path}")
+    print(manifest_path)
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     subparsers = parser.add_subparsers(dest="action", required=True)
@@ -339,6 +396,7 @@ def main(argv: list[str] | None = None) -> int:
     convert_parser.add_argument("--hf-model", type=Path, required=True)
     convert_parser.add_argument("--output-gguf", type=Path, required=True)
     convert_parser.add_argument("--outtype", choices=("f16", "bf16"), default="f16")
+    convert_parser.add_argument("--author", default=__author__)
     convert_parser.set_defaults(func=convert)
 
     build_parser = subparsers.add_parser("build", help="Apply a seven-tensor-per-block allocation to GGUF")
@@ -352,6 +410,15 @@ def main(argv: list[str] | None = None) -> int:
     build_parser.add_argument("--threads", type=int, default=4)
     build_parser.add_argument("--plan-only", action="store_true")
     build_parser.set_defaults(func=build)
+
+    preset_parser = subparsers.add_parser("preset", help="Quantize a whole-model llama.cpp preset")
+    preset_parser.add_argument("--llama-cpp-dir", type=Path, required=True)
+    preset_parser.add_argument("--source-gguf", type=Path, required=True)
+    preset_parser.add_argument("--output-gguf", type=Path, required=True)
+    preset_parser.add_argument("--quantize-bin", type=Path)
+    preset_parser.add_argument("--preset-type", choices=BASE_TYPES, required=True)
+    preset_parser.add_argument("--threads", type=int, default=4)
+    preset_parser.set_defaults(func=preset)
 
     args = parser.parse_args(argv)
     try:

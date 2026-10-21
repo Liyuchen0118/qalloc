@@ -1,0 +1,9 @@
+{
+  "author": "Yuchen Li",
+  "dataset": "WikiText-2 raw",
+  "split": "test",
+  "source": "https://huggingface.co/datasets/ggml-org/ci/resolve/main/wikitext-2-raw-v1.zip",
+  "archive_member": "wikitext-2-raw/wiki.test.raw",
+  "size_bytes": 1290590,
+  "sha256": "173c87a53759e0201f33e0ccf978e510c2042d7f2cb78229d9a50d79b9e7dd08"
+}

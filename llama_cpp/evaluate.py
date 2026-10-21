@@ -10,6 +10,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import os
 import re
 import subprocess
 import sys
@@ -17,6 +18,8 @@ import time
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
+
+__author__ = "Yuchen Li"
 
 
 _PPL_RE = re.compile(
@@ -212,8 +215,8 @@ def _parser() -> argparse.ArgumentParser:
 
     bench = subparsers.add_parser("bench", help="Measure prompt processing and token generation.")
     _add_common_options(bench)
-    bench.add_argument("--prompt-tokens", type=_positive_int, default=512)
-    bench.add_argument("--gen-tokens", type=_positive_int, default=128)
+    bench.add_argument("--prompt-tokens", type=_nonnegative_int, default=512)
+    bench.add_argument("--gen-tokens", type=_nonnegative_int, default=128)
     bench.add_argument("--repetitions", type=_positive_int, default=5)
     bench.add_argument("--context-depth", type=_nonnegative_int, default=0)
 
@@ -249,8 +252,11 @@ def main(argv: list[str] | None = None) -> int:
             parser.error(f"Evaluation corpus does not exist: {args.corpus}")
         if args.ppl_stride is not None and args.ppl_stride >= args.ctx_size:
             parser.error("--ppl-stride must be smaller than --ctx-size")
-    if args.mode == "bench" and args.prompt_tokens + args.gen_tokens + args.context_depth > 2**31 - 1:
-        parser.error("benchmark context token count is too large")
+    if args.mode == "bench":
+        if args.prompt_tokens == 0 and args.gen_tokens == 0:
+            parser.error("benchmark requires prompt or generation tokens")
+        if args.prompt_tokens + args.gen_tokens + args.context_depth > 2**31 - 1:
+            parser.error("benchmark context token count is too large")
     names = {
         "infer": ("llama-completion", "llama-cli"),
         "bench": ("llama-bench",),
@@ -295,8 +301,13 @@ def main(argv: list[str] | None = None) -> int:
 
     result: dict[str, Any] = {
         "schema_version": 1,
+        "author": __author__,
         "mode": args.mode,
         "started_at_utc": started.isoformat(),
+        "run_environment": {
+            "cuda_visible_devices": os.environ.get("CUDA_VISIBLE_DEVICES"),
+            "gpu_uuid": os.environ.get("QALLOC_GPU_UUID"),
+        },
         "model": _file_info(args.model, include_hash=args.hash_model),
         "executable": str(executable),
         "executable_version": _version(executable),

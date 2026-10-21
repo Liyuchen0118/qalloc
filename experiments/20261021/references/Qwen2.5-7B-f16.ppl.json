@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "author": "Yuchen Li",
+  "mode": "ppl",
+  "started_at_utc": "2026-10-21T13:28:35.744906+00:00",
+  "run_environment": {
+    "cuda_visible_devices": "GPU-54e16f83-71b9-d6fd-26c8-a0d483c5e7c3",
+    "gpu_uuid": "GPU-54e16f83-71b9-d6fd-26c8-a0d483c5e7c3"
+  },
+  "model": {
+    "path": "/home/hefeng/quant/qalloc/experiments/20261021/source/Qwen2.5-7B-f16.gguf",
+    "size_bytes": 15237853344,
+    "mtime_ns": 1792587742944789910
+  },
+  "executable": "/home/hefeng/quant/llama.cpp/build-qalloc-cuda/bin/llama-perplexity",
+  "executable_version": "version: 0.7.0-dev (build 11784, commit 493253fe5)\nbuilt with GNU 13.4.0 for Linux x86_64",
+  "command": [
+    "/home/hefeng/quant/llama.cpp/build-qalloc-cuda/bin/llama-perplexity",
+    "-m",
+    "/home/hefeng/quant/qalloc/experiments/20261021/source/Qwen2.5-7B-f16.gguf",
+    "-t",
+    "8",
+    "-ngl",
+    "999",
+    "-dev",
+    "CUDA0",
+    "-b",
+    "2048",
+    "-ub",
+    "512",
+    "-fa",
+    "on",
+    "-f",
+    "/home/hefeng/quant/qalloc/experiments/20261021/corpus/wiki.test.raw",
+    "-c",
+    "2048"
+  ],
+  "parameters": {
+    "mode": "ppl",
+    "threads": 8,
+    "gpu_layers": 999,
+    "device": "CUDA0",
+    "batch_size": 2048,
+    "ubatch_size": 512,
+    "cache_type_k": null,
+    "cache_type_v": null,
+    "flash_attn": "on",
+    "main_gpu": null,
+    "split_mode": null,
+    "timeout": 3600,
+    "hash_model": false,
+    "corpus": "/home/hefeng/quant/qalloc/experiments/20261021/corpus/wiki.test.raw",
+    "ctx_size": 2048,
+    "ppl_stride": null,
+    "max_chunks": null,
+    "corpus_sha256": "173c87a53759e0201f33e0ccf978e510c2042d7f2cb78229d9a50d79b9e7dd08"
+  },
+  "exit_code": 0,
+  "stdout": "0.75 minutes\n[1]4.0771,[2]4.4029,[3]4.8245,[4]5.2693,[5]5.5838,[6]5.0228,[7]4.6447,[8]4.7538,[9]4.9906,[10]5.1145,[11]5.2581,[12]5.4674,[13]5.4970,[14]5.6013,[15]5.6654,[16]5.7919,[17]5.8423,[18]5.9370,[19]5.8969,[20]5.7587,[21]5.7860,[22]5.8191,[23]5.8665,[24]5.8770,[25]5.9152,[26]5.9009,[27]6.0370,[28]6.1508,[29]6.2088,[30]6.1563,[31]6.0700,[32]5.9987,[33]5.9257,[34]5.9439,[35]5.9572,[36]5.9464,[37]5.8798,[38]5.8166,[39]5.7685,[40]5.6862,[41]5.6245,[42]5.6523,[43]5.7189,[44]5.8253,[45]5.8560,[46]5.8752,[47]5.9091,[48]5.9614,[49]6.0165,[50]5.9964,[51]6.0543,[52]6.0393,[53]6.0260,[54]6.0043,[55]5.9491,[56]5.9380,[57]5.8934,[58]5.8491,[59]5.8314,[60]5.8185,[61]5.8252,[62]5.8470,[63]5.8748,[64]5.9213,[65]5.8894,[66]5.9036,[67]5.9133,[68]5.9097,[69]5.9088,[70]5.9133,[71]5.8795,[72]5.8667,[73]5.8928,[74]5.9339,[75]5.9184,[76]5.9161,[77]5.9165,[78]5.9193,[79]5.9147,[80]5.9257,[81]5.9443,[82]5.9399,[83]5.9173,[84]5.8965,[85]5.8814,[86]5.8806,[87]5.8643,[88]5.8638,[89]5.8953,[90]5.9006,[91]5.9146,[92]5.9773,[93]6.0329,[94]6.0659,[95]6.1078,[96]6.1447,[97]6.1341,[98]6.1578,[99]6.1631,[100]6.1764,[101]6.1354,[102]6.1281,[103]6.1369,[104]6.1057,[105]6.0801,[106]6.0669,[107]6.0902,[108]6.0955,[109]6.0924,[110]6.0897,[111]6.0937,[112]6.0905,[113]6.0861,[114]6.0884,[115]6.0933,[116]6.1063,[117]6.1248,[118]6.1221,[119]6.1378,[120]6.1482,[121]6.1613,[122]6.1542,[123]6.1424,[124]6.1336,[125]6.1322,[126]6.1528,[127]6.1497,[128]6.1495,[129]6.1437,[130]6.1491,[131]6.1454,[132]6.1383,[133]6.1388,[134]6.1354,[135]6.1448,[136]6.1496,[137]6.1221,[138]6.0978,[139]6.1046,[140]6.1193,[141]6.1384,[142]6.1227,[143]6.1262,[144]6.1251,[145]6.1407,[146]6.1278,\n\n",
+  "stderr": "0.00.918.736 W load: control-looking token: 128247 '</s>' was not control-type; this is probably a bug in the model. its type will be overridden\n0.01.828.819 I cmn          init: llama threadpool init, n_threads = 8\n0.01.861.932 I \n0.01.861.995 I system_info: n_threads = 8 (n_threads_batch = 8) / 256 | CUDA : ARCHS = 1200 | USE_GRAPHS = 1 | FA_QUANTS = q4_0-q4_0,q8_0-q8_0,f16-f16,bf16-bf16 | BLACKWELL_NATIVE_FP4 = 1 | CPU : SSE3 = 1 | SSSE3 = 1 | AVX = 1 | AVX_VNNI = 1 | AVX2 = 1 | F16C = 1 | FMA = 1 | BMI2 = 1 | AVX512 = 1 | AVX512_VBMI = 1 | AVX512_VNNI = 1 | AVX512_BF16 = 1 | LLAMAFILE = 1 | OPENMP = 1 | REPACK = 1 | \n0.01.862.001 I perplexity: tokenizing the input ..\n0.02.140.156 I perplexity: tokenization took 278.145 ms\n0.02.140.183 I perplexity: calculating perplexity over 146 chunks, n_ctx=2048, batch_size=2048, n_seq=1\n0.02.448.616 I perplexity: 0.31 seconds per pass - ETA 0.33.053.285 I Final estimate: PPL = 6.1278 +/- 0.03689\n",
+  "metrics": {
+    "perplexity": 6.1278,
+    "perplexity_uncertainty": 0.03689
+  },
+  "status": "ok",
+  "duration_seconds": 33.288,
+  "finished_at_utc": "2026-10-21T13:29:09.062093+00:00"
+}
