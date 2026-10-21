@@ -1,0 +1,52 @@
+# Byte-compiled / optimized
+__pycache__/
+*.py[cod]
+*$py.class
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Excel temp files
+~$*.xlsx
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Archives (should not be in submission)
+*.zip
+
+# Claude/Gemini
+.claude/
+.gemini/
+
+# Logs
+*.log
+
+# QUBO CSV matrices (regenerate from scripts)
+*.csv
+
+# Local credentials and upload artifacts
+.env
+.env.*
+*.baiduyun.uploading.cfg
+
+# Model weights, calibration tensors, and generated artifacts
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+*.gguf
+*.bin
+models/
+checkpoints/
+datasets/
+outputs/
+wandb/
+results/experiment_logs/

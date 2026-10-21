@@ -1,0 +1,290 @@
+{
+    "0": {
+        "self_attn.q_proj": 16777216,
+        "self_attn.k_proj": 4194304,
+        "self_attn.v_proj": 4194304,
+        "self_attn.o_proj": 16777216,
+        "mlp.gate_proj": 58720256,
+        "mlp.up_proj": 58720256,
+        "mlp.down_proj": 58720256
+    },
+    "1": {
+        "self_attn.q_proj": 16777216,
+        "self_attn.k_proj": 4194304,
+        "self_attn.v_proj": 4194304,
+        "self_attn.o_proj": 16777216,
+        "mlp.gate_proj": 58720256,
+        "mlp.up_proj": 58720256,
+        "mlp.down_proj": 58720256
+    },
+    "2": {
+        "self_attn.q_proj": 16777216,
+        "self_attn.k_proj": 4194304,
+        "self_attn.v_proj": 4194304,
+        "self_attn.o_proj": 16777216,
+        "mlp.gate_proj": 58720256,
+        "mlp.up_proj": 58720256,
+        "mlp.down_proj": 58720256
+    },
+    "3": {
+        "self_attn.q_proj": 16777216,
+        "self_attn.k_proj": 4194304,
+        "self_attn.v_proj": 4194304,
+        "self_attn.o_proj": 16777216,
+        "mlp.gate_proj": 58720256,
+        "mlp.up_proj": 58720256,
+        "mlp.down_proj": 58720256
+    },
+    "4": {
+        "self_attn.q_proj": 16777216,
+        "self_attn.k_proj": 4194304,
+        "self_attn.v_proj": 4194304,
+        "self_attn.o_proj": 16777216,
+        "mlp.gate_proj": 58720256,
+        "mlp.up_proj": 58720256,
+        "mlp.down_proj": 58720256
+    },
+    "5": {
+        "self_attn.q_proj": 16777216,
+        "self_attn.k_proj": 4194304,
+        "self_attn.v_proj": 4194304,
+        "self_attn.o_proj": 16777216,
+        "mlp.gate_proj": 58720256,
+        "mlp.up_proj": 58720256,
+        "mlp.down_proj": 58720256
+    },
+    "6": {
+        "self_attn.q_proj": 16777216,
+        "self_attn.k_proj": 4194304,
+        "self_attn.v_proj": 4194304,
+        "self_attn.o_proj": 16777216,
+        "mlp.gate_proj": 58720256,
+        "mlp.up_proj": 58720256,
+        "mlp.down_proj": 58720256
+    },
+    "7": {
+        "self_attn.q_proj": 16777216,
+        "self_attn.k_proj": 4194304,
+        "self_attn.v_proj": 4194304,
+        "self_attn.o_proj": 16777216,
+        "mlp.gate_proj": 58720256,
+        "mlp.up_proj": 58720256,
+        "mlp.down_proj": 58720256
+    },
+    "8": {
+        "self_attn.q_proj": 16777216,
+        "self_attn.k_proj": 4194304,
+        "self_attn.v_proj": 4194304,
+        "self_attn.o_proj": 16777216,
+        "mlp.gate_proj": 58720256,
+        "mlp.up_proj": 58720256,
+        "mlp.down_proj": 58720256
+    },
+    "9": {
+        "self_attn.q_proj": 16777216,
+        "self_attn.k_proj": 4194304,
+        "self_attn.v_proj": 4194304,
+        "self_attn.o_proj": 16777216,
+        "mlp.gate_proj": 58720256,
+        "mlp.up_proj": 58720256,
+        "mlp.down_proj": 58720256
+    },
+    "10": {
+        "self_attn.q_proj": 16777216,
+        "self_attn.k_proj": 4194304,
+        "self_attn.v_proj": 4194304,
+        "self_attn.o_proj": 16777216,
+        "mlp.gate_proj": 58720256,
+        "mlp.up_proj": 58720256,
+        "mlp.down_proj": 58720256
+    },
+    "11": {
+        "self_attn.q_proj": 16777216,
+        "self_attn.k_proj": 4194304,
+        "self_attn.v_proj": 4194304,
+        "self_attn.o_proj": 16777216,
+        "mlp.gate_proj": 58720256,
+        "mlp.up_proj": 58720256,
+        "mlp.down_proj": 58720256
+    },
+    "12": {
+        "self_attn.q_proj": 16777216,
+        "self_attn.k_proj": 4194304,
+        "self_attn.v_proj": 4194304,
+        "self_attn.o_proj": 16777216,
+        "mlp.gate_proj": 58720256,
+        "mlp.up_proj": 58720256,
+        "mlp.down_proj": 58720256
+    },
+    "13": {
+        "self_attn.q_proj": 16777216,
+        "self_attn.k_proj": 4194304,
+        "self_attn.v_proj": 4194304,
+        "self_attn.o_proj": 16777216,
+        "mlp.gate_proj": 58720256,
+        "mlp.up_proj": 58720256,
+        "mlp.down_proj": 58720256
+    },
+    "14": {
+        "self_attn.q_proj": 16777216,
+        "self_attn.k_proj": 4194304,
+        "self_attn.v_proj": 4194304,
+        "self_attn.o_proj": 16777216,
+        "mlp.gate_proj": 58720256,
+        "mlp.up_proj": 58720256,
+        "mlp.down_proj": 58720256
+    },
+    "15": {
+        "self_attn.q_proj": 16777216,
+        "self_attn.k_proj": 4194304,
+        "self_attn.v_proj": 4194304,
+        "self_attn.o_proj": 16777216,
+        "mlp.gate_proj": 58720256,
+        "mlp.up_proj": 58720256,
+        "mlp.down_proj": 58720256
+    },
+    "16": {
+        "self_attn.q_proj": 16777216,
+        "self_attn.k_proj": 4194304,
+        "self_attn.v_proj": 4194304,
+        "self_attn.o_proj": 16777216,
+        "mlp.gate_proj": 58720256,
+        "mlp.up_proj": 58720256,
+        "mlp.down_proj": 58720256
+    },
+    "17": {
+        "self_attn.q_proj": 16777216,
+        "self_attn.k_proj": 4194304,
+        "self_attn.v_proj": 4194304,
+        "self_attn.o_proj": 16777216,
+        "mlp.gate_proj": 58720256,
+        "mlp.up_proj": 58720256,
+        "mlp.down_proj": 58720256
+    },
+    "18": {
+        "self_attn.q_proj": 16777216,
+        "self_attn.k_proj": 4194304,
+        "self_attn.v_proj": 4194304,
+        "self_attn.o_proj": 16777216,
+        "mlp.gate_proj": 58720256,
+        "mlp.up_proj": 58720256,
+        "mlp.down_proj": 58720256
+    },
+    "19": {
+        "self_attn.q_proj": 16777216,
+        "self_attn.k_proj": 4194304,
+        "self_attn.v_proj": 4194304,
+        "self_attn.o_proj": 16777216,
+        "mlp.gate_proj": 58720256,
+        "mlp.up_proj": 58720256,
+        "mlp.down_proj": 58720256
+    },
+    "20": {
+        "self_attn.q_proj": 16777216,
+        "self_attn.k_proj": 4194304,
+        "self_attn.v_proj": 4194304,
+        "self_attn.o_proj": 16777216,
+        "mlp.gate_proj": 58720256,
+        "mlp.up_proj": 58720256,
+        "mlp.down_proj": 58720256
+    },
+    "21": {
+        "self_attn.q_proj": 16777216,
+        "self_attn.k_proj": 4194304,
+        "self_attn.v_proj": 4194304,
+        "self_attn.o_proj": 16777216,
+        "mlp.gate_proj": 58720256,
+        "mlp.up_proj": 58720256,
+        "mlp.down_proj": 58720256
+    },
+    "22": {
+        "self_attn.q_proj": 16777216,
+        "self_attn.k_proj": 4194304,
+        "self_attn.v_proj": 4194304,
+        "self_attn.o_proj": 16777216,
+        "mlp.gate_proj": 58720256,
+        "mlp.up_proj": 58720256,
+        "mlp.down_proj": 58720256
+    },
+    "23": {
+        "self_attn.q_proj": 16777216,
+        "self_attn.k_proj": 4194304,
+        "self_attn.v_proj": 4194304,
+        "self_attn.o_proj": 16777216,
+        "mlp.gate_proj": 58720256,
+        "mlp.up_proj": 58720256,
+        "mlp.down_proj": 58720256
+    },
+    "24": {
+        "self_attn.q_proj": 16777216,
+        "self_attn.k_proj": 4194304,
+        "self_attn.v_proj": 4194304,
+        "self_attn.o_proj": 16777216,
+        "mlp.gate_proj": 58720256,
+        "mlp.up_proj": 58720256,
+        "mlp.down_proj": 58720256
+    },
+    "25": {
+        "self_attn.q_proj": 16777216,
+        "self_attn.k_proj": 4194304,
+        "self_attn.v_proj": 4194304,
+        "self_attn.o_proj": 16777216,
+        "mlp.gate_proj": 58720256,
+        "mlp.up_proj": 58720256,
+        "mlp.down_proj": 58720256
+    },
+    "26": {
+        "self_attn.q_proj": 16777216,
+        "self_attn.k_proj": 4194304,
+        "self_attn.v_proj": 4194304,
+        "self_attn.o_proj": 16777216,
+        "mlp.gate_proj": 58720256,
+        "mlp.up_proj": 58720256,
+        "mlp.down_proj": 58720256
+    },
+    "27": {
+        "self_attn.q_proj": 16777216,
+        "self_attn.k_proj": 4194304,
+        "self_attn.v_proj": 4194304,
+        "self_attn.o_proj": 16777216,
+        "mlp.gate_proj": 58720256,
+        "mlp.up_proj": 58720256,
+        "mlp.down_proj": 58720256
+    },
+    "28": {
+        "self_attn.q_proj": 16777216,
+        "self_attn.k_proj": 4194304,
+        "self_attn.v_proj": 4194304,
+        "self_attn.o_proj": 16777216,
+        "mlp.gate_proj": 58720256,
+        "mlp.up_proj": 58720256,
+        "mlp.down_proj": 58720256
+    },
+    "29": {
+        "self_attn.q_proj": 16777216,
+        "self_attn.k_proj": 4194304,
+        "self_attn.v_proj": 4194304,
+        "self_attn.o_proj": 16777216,
+        "mlp.gate_proj": 58720256,
+        "mlp.up_proj": 58720256,
+        "mlp.down_proj": 58720256
+    },
+    "30": {
+        "self_attn.q_proj": 16777216,
+        "self_attn.k_proj": 4194304,
+        "self_attn.v_proj": 4194304,
+        "self_attn.o_proj": 16777216,
+        "mlp.gate_proj": 58720256,
+        "mlp.up_proj": 58720256,
+        "mlp.down_proj": 58720256
+    },
+    "31": {
+        "self_attn.q_proj": 16777216,
+        "self_attn.k_proj": 4194304,
+        "self_attn.v_proj": 4194304,
+        "self_attn.o_proj": 16777216,
+        "mlp.gate_proj": 58720256,
+        "mlp.up_proj": 58720256,
+        "mlp.down_proj": 58720256
+    }
+}
