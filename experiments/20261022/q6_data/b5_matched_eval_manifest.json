@@ -1,0 +1,48 @@
+{
+  "author": "Yuchen Li",
+  "gpu_index": 6,
+  "gpu_uuid": "GPU-9ef20e77-b08e-d0e4-ed70-833fde0a8837",
+  "llama_cpp_commit": "493253fe5a5af7e800b3c92a2452b5684a99e961",
+  "scenarios": [
+    "old_b5_ppl",
+    "old_b5_prefill",
+    "old_b5_decode",
+    "new_b5_ppl",
+    "new_b5_prefill",
+    "new_b5_decode"
+  ],
+  "results": [
+    {
+      "scenario": "old_b5_ppl",
+      "status": "reused",
+      "path": "/home/hefeng/quant/qalloc/experiments/20261022/q6_data/eval/old_b5_ppl.json"
+    },
+    {
+      "scenario": "old_b5_prefill",
+      "status": "reused",
+      "path": "/home/hefeng/quant/qalloc/experiments/20261022/q6_data/eval/old_b5_prefill.json"
+    },
+    {
+      "scenario": "old_b5_decode",
+      "status": "reused",
+      "path": "/home/hefeng/quant/qalloc/experiments/20261022/q6_data/eval/old_b5_decode.json"
+    },
+    {
+      "scenario": "new_b5_ppl",
+      "status": "reused",
+      "path": "/home/hefeng/quant/qalloc/experiments/20261022/q6_data/eval/new_b5_ppl.json"
+    },
+    {
+      "scenario": "new_b5_prefill",
+      "status": "reused",
+      "path": "/home/hefeng/quant/qalloc/experiments/20261022/q6_data/eval/new_b5_prefill.json"
+    },
+    {
+      "scenario": "new_b5_decode",
+      "status": "ok",
+      "path": "/home/hefeng/quant/qalloc/experiments/20261022/q6_data/eval/new_b5_decode.json",
+      "stdout_tail": "Result: /home/hefeng/quant/qalloc/experiments/20261022/q6_data/eval/new_b5_decode.json\npp=0 tg=128 avg_ts=203.04013\n",
+      "stderr_tail": ""
+    }
+  ]
+}

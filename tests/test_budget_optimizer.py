@@ -74,11 +74,25 @@ class BudgetOptimizerTests(unittest.TestCase):
     def test_report_metadata_identifies_author_and_methods(self) -> None:
         report = optimizer.solve_all(self.problem)
         self.assertEqual(report["metadata"]["author"], "Yuchen Li")
+        self.assertEqual(report["candidate_types"], ["Q3_K", "Q4_K", "Q5_K", "Q8_0"])
         self.assertEqual(len(report["results"]), 3)
         self.assertEqual(
             set(report["results"][0]["methods"]),
             {"milp", "lagrangian_repair_exchange", "greedy_gain_per_byte"},
         )
+
+    def test_q6_candidate_is_loaded_without_changing_legacy_q8_problem(self) -> None:
+        q6_data = json.loads(json.dumps(self.problem_data))
+        for tensor in q6_data["tensors"]:
+            tensor["choices"]["Q6_K"] = tensor["choices"].pop("Q8_0")
+        with tempfile.TemporaryDirectory() as directory:
+            input_path = Path(directory) / "q6.json"
+            input_path.write_text(json.dumps(q6_data), encoding="utf-8")
+            problem = optimizer.load_problem(input_path)
+        report = optimizer.solve_all(problem)
+        self.assertEqual(report["candidate_types"], ["Q3_K", "Q4_K", "Q5_K", "Q6_K"])
+        self.assertTrue(all("Q6_K" in {choice.tensor_type for choice in tensor.choices}
+                            for tensor in problem.tensors))
 
     def test_cli_output_persists_author_metadata(self) -> None:
         with tempfile.TemporaryDirectory() as directory:

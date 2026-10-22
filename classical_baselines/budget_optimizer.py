@@ -10,7 +10,7 @@ Input JSON format::
           "Q3_K": {"bytes": 300, "loss": 0.12},
           "Q4_K": {"bytes": 400, "loss": 0.04},
           "Q5_K": {"bytes": 500, "loss": 0.01},
-          "Q8_0": {"bytes": 800, "loss": 0.0}
+          "Q6_K": {"bytes": 600, "loss": 0.005}
         }}
       ]
     }
@@ -32,7 +32,7 @@ from typing import Any
 
 __author__ = "Yuchen Li"
 
-TYPE_ORDER = ("Q3_K", "Q4_K", "Q5_K", "Q8_0")
+TYPE_ORDER = ("Q3_K", "Q4_K", "Q5_K", "Q6_K", "Q8_0")
 EPSILON = 1e-12
 
 
@@ -173,6 +173,9 @@ def solve_milp(problem: Problem, budget: int, time_limit: float | None, mip_rel_
             "solve_time_seconds": time.perf_counter() - started,
         })
     flat_choices = [choice for tensor in problem.tensors for choice in tensor.choices]
+    byte_unit = math.gcd(budget, *(choice.byte_count for choice in flat_choices))
+    budget_units = budget // byte_unit
+    requested_gap = 0.0 if mip_rel_gap is None else mip_rel_gap
     try:
         import numpy as np
         from scipy.optimize import Bounds, LinearConstraint, milp
@@ -191,8 +194,7 @@ def solve_milp(problem: Problem, budget: int, time_limit: float | None, mip_rel_
             model.Params.OutputFlag = 0
             if time_limit is not None:
                 model.Params.TimeLimit = time_limit
-            if mip_rel_gap is not None:
-                model.Params.MIPGap = mip_rel_gap
+            model.Params.MIPGap = requested_gap
             variables = [
                 [model.addVar(vtype=GRB.BINARY, obj=choice.loss, name=f"x_{i}_{j}")
                  for j, choice in enumerate(tensor.choices)]
@@ -202,10 +204,10 @@ def solve_milp(problem: Problem, budget: int, time_limit: float | None, mip_rel_
             for item_vars in variables:
                 model.addConstr(gp.quicksum(item_vars) == 1)
             model.addConstr(gp.quicksum(
-                choice.byte_count * variable
+                (choice.byte_count // byte_unit) * variable
                 for tensor, item_vars in zip(problem.tensors, variables)
                 for choice, variable in zip(tensor.choices, item_vars)
-            ) <= budget)
+            ) <= budget_units)
             model.optimize()
         except Exception as exc:
             return _result(problem, budget, method, None, "solver_error", {
@@ -226,7 +228,8 @@ def solve_milp(problem: Problem, budget: int, time_limit: float | None, mip_rel_
             "solver_message": status,
             "solve_time_seconds": time.perf_counter() - started,
             "time_limit_seconds": time_limit,
-            "requested_relative_gap": mip_rel_gap,
+            "requested_relative_gap": requested_gap,
+            "budget_byte_unit": byte_unit,
             "gurobi_version": ".".join(map(str, gp.gurobi.version())),
         }
         if model.SolCount == 0:
@@ -239,7 +242,7 @@ def solve_milp(problem: Problem, budget: int, time_limit: float | None, mip_rel_
         diagnostics["relative_gap"] = float(model.MIPGap)
         diagnostics["node_count"] = int(model.NodeCount)
         diagnostics["incumbent_objective"] = float(model.ObjVal)
-        solver_status = status
+        solver_status = "gap_satisfied" if status == "optimal" and model.MIPGap > 1e-10 else status
     else:
         offsets = [0]
         for tensor in problem.tensors:
@@ -251,13 +254,12 @@ def solve_milp(problem: Problem, budget: int, time_limit: float | None, mip_rel_
         for index in range(len(problem.tensors)):
             matrix[index, offsets[index]:offsets[index + 1]] = 1.0
             lower[index] = upper[index] = 1.0
-        matrix[-1, :] = [choice.byte_count for choice in flat_choices]
-        upper[-1] = float(budget)
+        matrix[-1, :] = [choice.byte_count // byte_unit for choice in flat_choices]
+        upper[-1] = float(budget_units)
         options: dict[str, Any] = {}
         if time_limit is not None:
             options["time_limit"] = time_limit
-        if mip_rel_gap is not None:
-            options["mip_rel_gap"] = mip_rel_gap
+        options["mip_rel_gap"] = requested_gap
 
         try:
             result = milp(
@@ -283,12 +285,16 @@ def solve_milp(problem: Problem, budget: int, time_limit: float | None, mip_rel_
             "solver_message": str(result.message),
             "solve_time_seconds": time.perf_counter() - started,
             "time_limit_seconds": time_limit,
-            "requested_relative_gap": mip_rel_gap,
+            "requested_relative_gap": requested_gap,
+            "budget_byte_unit": byte_unit,
         }
         for source, target in (("mip_dual_bound", "best_bound"), ("mip_gap", "relative_gap"), ("mip_node_count", "node_count")):
             value = getattr(result, source, None)
             if value is not None and isinstance(value, (int, float)) and math.isfinite(float(value)):
                 diagnostics[target] = float(value) if target != "node_count" else int(value)
+
+        if solver_status == "optimal" and diagnostics.get("relative_gap", 0.0) > 1e-10:
+            solver_status = "gap_satisfied"
 
         if result.x is None:
             return _result(problem, budget, method, None, solver_status, diagnostics)
@@ -582,7 +588,11 @@ def solve_all(problem: Problem, time_limit: float | None = None, mip_rel_gap: fl
             "objective": "minimize additive proxy loss",
             "budget_semantics": "sum of per-tensor bytes <= budget_bytes",
         },
-        "candidate_types": list(TYPE_ORDER),
+        "candidate_types": [
+            tensor_type for tensor_type in TYPE_ORDER
+            if any(any(choice.tensor_type == tensor_type for choice in tensor.choices)
+                   for tensor in problem.tensors)
+        ],
         "results": results,
     }
 

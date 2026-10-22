@@ -5,8 +5,9 @@ supporting experiments. The original optimizer targets analytic bit-width
 allocation with the candidate set `{2, 3, 4, 8}`. The `llama_cpp/` wrappers
 now turn a seven-projection-per-block allocation into a mixed-type GGUF and run
 inference, throughput benchmarks, and perplexity evaluation with an external
-llama.cpp checkout. The optimizer does not yet enforce measured device-memory
-budgets or connect to the 1000-bit photonic Ising machine.
+llama.cpp checkout. The revised optimizer uses measured GGUF storage bytes;
+it does not yet guarantee runtime device-memory budgets or have a verified
+physical run on the 1000-bit photonic Ising machine.
 
 ## Contents
 
@@ -72,7 +73,19 @@ GGUF file size, while `llama_cpp/evaluate.py` records inference output,
 benchmark results, and corpus perplexity. Model weights and evaluation data
 are not included. The existing Fisher scores are historical inputs, not
 validated GGUF loss estimates. See the [llama.cpp guide](llama_cpp/README.md)
-for the full workflow and its scope.
+for the full workflow and its scope. The [SCIS experiment plan](SCIS_EXPERIMENT_PLAN.md)
+sets MILP and Lagrangian relaxation with local exchange as the new primary
+classical baselines under the same measured GGUF byte budgets; the original
+generic heuristics are historical controls only.
+
+The [October 22 experiment](experiments/20261022/two_bit_qubo/README.md)
+measures `Q6_K` alongside `Q3_K/Q4_K/Q5_K` and encodes four types with two
+decision bits per tensor. Its five 392-409-variable QUBOs are exact,
+unrounded mathematical references. Their coefficients do not fit the
+photonic platform's signed 8-bit range. Separate
+[adjacent-type hardware subproblems](experiments/20261022/int8_adjacent/README.md)
+fit that range but impose fixed per-block quotas, so they do not solve the
+unrestricted global-budget allocation problem.
 
 ## License and attribution
 
